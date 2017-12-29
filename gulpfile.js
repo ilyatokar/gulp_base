@@ -12,15 +12,21 @@ gulp.task('browser-sync', function(){
 });
 
 gulp.task('styles', function(){
-	return gulp.src('sass/style.scss')
+	return gulp.src('/dist/sass/style.scss')
 	.pipe(sass())
 	.pipe(autoprefixer())
 	.pipe(gulp.dest('dist/css'))
 	.pipe(brws.stream());
 });
 
+gulp.task('html', function () {
+	return gulp.src('/dist/*.html')
+	.pipe(brws.stream());
+})
+
 gulp.task('watch', function(){
 	gulp.watch('./dist/sass/**/*.scss', ['styles']);
+	gulp.watch('.dist/*.html', ['html']);
 });
 
 gulp.task('default', ['browser-sync', 'watch']);
